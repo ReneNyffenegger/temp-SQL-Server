@@ -25,7 +25,10 @@ from
 where
    job.name = 'tq84_job_example_job'
 ;
+
+
 select
+   stp.step_id,
    stp.step_name,
    stp.subsystem,
    stp.additional_parameters,
@@ -38,9 +41,11 @@ from
    msdb..sysjobs      job                              left join --  created jobs
    msdb..sysjobsteps  stp on job.job_id = stp.job_id
 where
-   job.name = 'tq84_job_example_job';
-
-
+   job.name = 'tq84_job_example_job'
+order by
+   stp.step_id;
+   
+   
 -- select * from msdb..sysjobsteplogs
 
 exec msdb..sp_help_job @job_name = 'tq84_job_example_job', @job_aspect = 'job'
