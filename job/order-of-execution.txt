@@ -1,4 +1,7 @@
 @table.sql
 @insert.sql
-@add-job
-@add-jobstep
+@add-job.sql
+@add-jobstep.sql
+@add-jobschedule.sql
+@attach-schedule.sql
+add-jobserver.sql
