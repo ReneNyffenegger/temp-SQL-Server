@@ -5,7 +5,7 @@ exec msdb..sp_add_jobstep
     @subsystem         = N'TSQL',
     @database_name     =  'job_test',                   -- <<<  Change here !!!
     @command           = N'exec tq84_job_example_proc',
-    @on_success_action =   3, -- Go to next step
+    @on_success_action =   1, -- 1:...  /  3: Go to next step (3 should not be the value of the last step)
     @retry_attempts    =   0,  
     @retry_interval    =   0;  
 ;
