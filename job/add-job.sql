@@ -1,8 +1,7 @@
 -- Msg 2812, Level 16, State 62, Line 28
 -- Could not find stored procedure 'sp_add_job'.
 
--- exec msdb..sp_add_job @job_name = N'tq84_job_example_job';
-   exec msdb..sp_add_job @job_name = N'exec tq84_job_example_job';
+exec msdb..sp_add_job @job_name = N'tq84_job_example_job';
 
 --
 -- After a job was added, the job is shown in the Management Studio in the Object Explorer under
