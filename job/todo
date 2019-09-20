@@ -1,0 +1,46 @@
+select * from msdb..sysjobactivity; --  current information of the jobs
+select * from msdb..sysjobhistory ; --  job execution results
+
+select
+   job.job_id,
+   job.date_created   date_job_created,
+   job.date_modified  date_job_modified,
+   job.enabled,
+   job.notify_level_eventlog,
+   job.owner_sid,
+   --
+   srv.server_id,
+   srv.last_run_outcome,
+   srv.last_run_date,
+   srv.last_run_time,
+   srv.last_run_duration,
+   srv.last_outcome_message
+from
+   msdb..sysjobs          job           left join --  created jobs
+   msdb..sysjobservers    srv on job.job_id = srv.job_id
+where
+   job.name = 'tq84_job_example_job'
+;
+
+select
+   stp.step_name,
+   stp.subsystem,
+   stp.additional_parameters,
+   stp.database_name           step_database,
+   stp.retry_attempts,
+   stp.retry_interval,
+   stp.last_run_date    last_run_date_step,
+   stp.last_run_time    last_run_time_step
+from
+   msdb..sysjobs      job                              left join --  created jobs
+   msdb..sysjobsteps  stp on job.job_id = stp.job_id
+where
+   job.name = 'tq84_job_example_job';
+
+
+-- select * from msdb..sysjobsteplogs
+
+exec msdb..sp_help_job @job_name = 'tq84_job_example_job', @job_aspect = 'job'
+exec msdb..sp_help_job @job_name = 'tq84_job_example_job', @job_aspect = 'schedules'
+exec msdb..sp_help_job @job_name = 'tq84_job_example_job', @job_aspect = 'steps'
+exec msdb..sp_help_job @job_name = 'tq84_job_example_job', @job_aspect = 'targets'
