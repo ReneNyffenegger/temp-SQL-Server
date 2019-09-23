@@ -9,13 +9,35 @@ select
    act.last_executed_step_date,
    act.stop_execution_date,
    act.job_history_id,
-   next_scheduled_run_date
+   next_scheduled_run_date,
+   datediff(ss, getdate(), next_scheduled_run_date) seconds_from_now
 from
    msdb..sysjobs          job                                 left join
    msdb..sysjobactivity   act on job.job_Id = act.job_id
 
 
-select * from msdb..sysjobhistory ; --  job execution results
+select
+   his.run_date,
+   his.run_time,
+   his.run_duration,
+   his.instance_id,
+   his.step_id,
+   his.step_name,
+   his.run_status,
+   his.sql_message_id,
+   his.sql_severity,
+   his.message,
+   his.server
+from
+   msdb..sysjobs          job                             left join
+   msdb..sysjobhistory    his on job.job_id = his.job_id
+where
+   job.name = 'tq84_job_example_job'
+order by
+   his.instance_id desc
+-- his.run_date desc,
+-- his.run_time desc
+;
 
 select * from msdb..sysschedules;
 
