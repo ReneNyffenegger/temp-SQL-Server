@@ -1,4 +1,20 @@
-select * from msdb..sysjobactivity; --  current information of the jobs
+--  current information of the jobs
+select
+   job.name,
+   act.session_id,
+   act.run_requested_date,
+   act.run_requested_source,
+   act.start_execution_date,
+   act.last_executed_step_id,
+   act.last_executed_step_date,
+   act.stop_execution_date,
+   act.job_history_id,
+   next_scheduled_run_date
+from
+   msdb..sysjobs          job                                 left join
+   msdb..sysjobactivity   act on job.job_Id = act.job_id
+
+
 select * from msdb..sysjobhistory ; --  job execution results
 
 select * from msdb..sysschedules;
