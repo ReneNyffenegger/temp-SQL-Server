@@ -1,8 +1,9 @@
 select * from msdb..sysjobactivity; --  current information of the jobs
 select * from msdb..sysjobhistory ; --  job execution results
 
+select * from msdb..sysschedules;
 
- select
+select
    job.job_id,
    job.date_created            date_job_created,
    job.date_modified           date_job_modified,
@@ -53,3 +54,5 @@ exec msdb..sp_help_job @job_name = 'tq84_job_example_job', @job_aspect = 'job'
 exec msdb..sp_help_job @job_name = 'tq84_job_example_job', @job_aspect = 'schedules'
 exec msdb..sp_help_job @job_name = 'tq84_job_example_job', @job_aspect = 'steps'
 exec msdb..sp_help_job @job_name = 'tq84_job_example_job', @job_aspect = 'targets'
+
+
