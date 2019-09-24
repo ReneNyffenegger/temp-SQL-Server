@@ -1,6 +1,10 @@
+
+where
+   job.name = 'tq84_job_example_job';
+
+
 --  current information of the jobs
 select
-   job.name,
    act.session_id,
    act.run_requested_date,
    act.run_requested_source,
@@ -12,8 +16,10 @@ select
    next_scheduled_run_date,
    datediff(ss, getdate(), next_scheduled_run_date) seconds_from_now
 from
-   msdb..sysjobs          job                                 left join
-   msdb..sysjobactivity   act on job.job_Id = act.job_id
+   msdb.dbo.sysjobs          job                                 left join
+   msdb.dbo.sysjobactivity   act on job.job_Id = act.job_id
+where
+   job.name = 'tq84_job_example_job';
 
 
 select
@@ -29,14 +35,12 @@ select
    his.message,
    his.server
 from
-   msdb..sysjobs          job                             left join
-   msdb..sysjobhistory    his on job.job_id = his.job_id
+   msdb.dbo.sysjobs          job                             left join
+   msdb.dbo.sysjobhistory    his on job.job_id = his.job_id
 where
    job.name = 'tq84_job_example_job'
 order by
    his.instance_id desc
--- his.run_date desc,
--- his.run_time desc
 ;
 
 select * from msdb..sysschedules;
@@ -58,39 +62,16 @@ select
    srv.last_run_duration,
    srv.last_outcome_message
 from
-   msdb..sysjobs          job                                 left join --  created jobs
-   master.sys.syslogins   own on job.owner_sid = own.sid      left join
-   msdb..sysjobservers    srv on job.job_id    = srv.job_id
+   msdb.dbo.sysjobs          job                                 left join
+   master.sys.syslogins      own on job.owner_sid = own.sid      left join
+   msdb.dbo.sysjobservers    srv on job.job_id    = srv.job_id
 where
    job.name = 'tq84_job_example_job'
 ;
 
 
-select
-   stp.step_uid,
-   stp.step_id,
-   stp.step_name,
-   stp.subsystem,
-   stp.additional_parameters,
-   stp.database_name           step_database,
-   stp.retry_attempts,
-   stp.retry_interval,
-   stp.last_run_date    last_run_date_step,
-   stp.last_run_time    last_run_time_step,
-   case stp.on_success_action when 3 then 'go on with next step' end on_success_acction
-from
-   msdb..sysjobs      job                              left join --  created jobs
-   msdb..sysjobsteps  stp on job.job_id = stp.job_id
-where
-   job.name = 'tq84_job_example_job'
-order by
-   stp.step_id;
    
 -- select * from msdb..sysjobsteplogs
 
-exec msdb..sp_help_job @job_name = 'tq84_job_example_job', @job_aspect = 'job'
-exec msdb..sp_help_job @job_name = 'tq84_job_example_job', @job_aspect = 'schedules'
-exec msdb..sp_help_job @job_name = 'tq84_job_example_job', @job_aspect = 'steps'
-exec msdb..sp_help_job @job_name = 'tq84_job_example_job', @job_aspect = 'targets'
 
 
