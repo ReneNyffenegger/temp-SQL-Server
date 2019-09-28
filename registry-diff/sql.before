@@ -1,0 +1,18 @@
+
+HKEY_LOCAL_MACHINE\software\microsoft\Microsoft ODBC Driver 13 for SQL Server
+HKEY_LOCAL_MACHINE\software\microsoft\Microsoft SQL Server
+HKEY_LOCAL_MACHINE\software\microsoft\Microsoft SQL Server 2005 Redist
+HKEY_LOCAL_MACHINE\software\microsoft\Microsoft SQL Server 2008 Redist
+HKEY_LOCAL_MACHINE\software\microsoft\Microsoft SQL Server 2012 Redist
+HKEY_LOCAL_MACHINE\software\microsoft\Microsoft SQL Server 2014 Redist
+HKEY_LOCAL_MACHINE\software\microsoft\Microsoft SQL Server 2016 Redist
+HKEY_LOCAL_MACHINE\software\microsoft\Microsoft SQL Server 2017 Redist
+HKEY_LOCAL_MACHINE\software\microsoft\Microsoft SQL Server 2019 CTP2.2 Redist
+HKEY_LOCAL_MACHINE\software\microsoft\Microsoft SQL Server Compact Edition
+HKEY_LOCAL_MACHINE\software\microsoft\Microsoft SQL Server Local DB
+HKEY_LOCAL_MACHINE\software\microsoft\Microsoft SQL Server Native Client 11.0
+HKEY_LOCAL_MACHINE\software\microsoft\MSADALSQL
+HKEY_LOCAL_MACHINE\software\microsoft\MSODBCSQL13
+HKEY_LOCAL_MACHINE\software\microsoft\MSSQLServer
+HKEY_LOCAL_MACHINE\software\microsoft\SQLNCLI11
+End of search: 16 match(es) found.
