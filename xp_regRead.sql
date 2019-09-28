@@ -26,3 +26,19 @@ select
    convert(char   (20), serverproperty('MachineName' )) as hostname,
    convert(varchar(10), @PortNumber                   ) as portNumber
 ;
+
+go
+
+
+declare
+    @data varchar(255);
+
+execute  xp_regread
+    @rootkey    = 'HKEY_LOCAL_MACHINE',
+    @key        = 'SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL',
+    @value_name = 'MSSQLSERVER',
+    @data       = @data out;
+
+print(@data);
+
+go
