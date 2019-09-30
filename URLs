@@ -1,0 +1,36 @@
+http://localhost:81/ReportServer
+https://docs.microsoft.com/en-us/sql/reporting-services/install-windows/install-reporting-services-native-mode-report-server?view=sql-server-2017
+https://www.dummies.com/programming/sql/key-components-of-microsoft-sql-server/
+https://renenyffenegger.ch/notes/development/databases/SQL-Server/architecture/instance
+
+https://docs.microsoft.com/en-us/sql/sql-server/install/instance-configuration?view=sql-server-ver15&redirectedfrom=MSDN
+https://dba.stackexchange.com/questions/58014/sql-server-difference-between-instance-name-and-instance-id
+
+https://docs.microsoft.com/en-us/sql/sql-server/install/file-locations-for-default-and-named-instances-of-sql-server?view=sql-server-2014
+https://docs.microsoft.com/en-us/sql/sql-server/install/instance-configuration?view=sql-server-2014&redirectedfrom=MSDN
+https://docs.microsoft.com/en-us/sql/sql-server/install/file-locations-for-default-and-named-instances-of-sql-server?view=sql-server-2017
+https://docs.microsoft.com/bs-cyrl-ba/sql/sql-server/install/instance-configuration?view=sql-server-2014
+https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/configure-windows-service-accounts-and-permissions?view=sql-server-2017
+http://stackz.ru/en/5287032/how-do-i-connect-to-the-default-instance-of-sql-server-if-a-and-quotname
+https://stackoverflow.com/questions/10353520/sql-server-instance-id
+https://serverfault.com/questions/80767/sql-server-what-are-named-and-default-instances
+https://dba.stackexchange.com/questions/56045/any-relation-between-sql-server-service-name-and-instance-name
+  
+
+   https://stackoverflow.com/questions/18070177/how-to-get-current-instance-name-from-t-sql
+   https://stackoverflow.com/questions/30641185/get-sql-server-instance-name-from-registry                                                            (   (get-itemProperty 'HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server').installedInstances   )
+
+          Get-WmiObject -ComputerName "YourDestinationServer" -Namespace "root\microsoft\sqlserver\computermanagement11" -Class "SqlService" |
+    Where-Object {$_.SQLServiceType -eq 1} |
+    Select-Object ServiceName, DisplayName, 
+        @{Name = "StateDesc"; Expression = {
+            switch ($_.State) {
+                1 { "Stopped" }
+                2 { "Start Pending" }
+                3 { "Stop Pending" }
+                4 { "Running" }
+                5 { "Continue Pending" }
+                6 { "Pause Pending" }
+                7 { "Paused" }
+            }
+        }}
