@@ -1,6 +1,5 @@
 http://localhost:81/ReportServer
 https://docs.microsoft.com/en-us/sql/reporting-services/install-windows/install-reporting-services-native-mode-report-server?view=sql-server-2017
-https://www.dummies.com/programming/sql/key-components-of-microsoft-sql-server/
 https://renenyffenegger.ch/notes/development/databases/SQL-Server/architecture/instance
 
 https://docs.microsoft.com/en-us/sql/sql-server/install/instance-configuration?view=sql-server-ver15&redirectedfrom=MSDN
@@ -34,3 +33,7 @@ https://dba.stackexchange.com/questions/56045/any-relation-between-sql-server-se
                 7 { "Paused" }
             }
         }}
+
+
+
+https://www.dummies.com/programming/sql/key-components-of-microsoft-sql-server/
