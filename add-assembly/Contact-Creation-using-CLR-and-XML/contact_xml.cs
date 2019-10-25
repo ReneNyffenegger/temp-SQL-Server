@@ -23,41 +23,34 @@ using System.Data.SqlClient;
     /// neither store or vendor rows are inserted into the database.  
     ///   
     /// </summary>  
-    public sealed class ContactUtils  
-    {  
+public sealed class ContactUtils  {  
   
-        private ContactUtils()  
-        {  
+   private ContactUtils()  {}  
+  
+    public static void CreateContact(SqlString contactData,  
+                                     out SqlInt32 contactId,  
+                                     out SqlInt32 customerId)  
+    {  
+        //TODO: When we can pass XML from T-SQL then contactData can be a SqlXmlReader  
+     using (StringReader sr = new StringReader(contactData.Value))  {  
+     XmlReader reader = XmlReader.Create(sr);  
+     ContactCreator creator = null;  
+  
+        try  {  
+           reader.MoveToContent();  
+           EnsureEqual(reader.LocalName, "Contact");  
+           reader.MoveToContent();  
+           reader.ReadStartElement();  
+          
+        switch (reader.LocalName)  {  
+        case "Individual": creator = new IndividualCreator(); break;  
+        case "Store": creator = new StoreCreator(); break;  
+        case "Vendor": creator = new VendorCreator(); break;  
+        case "Employee": creator = new EmployeeCreator(); break;  
+        default: break;  
         }  
   
-        public static void CreateContact(SqlString contactData,  
-                                         out SqlInt32 contactId,  
-                                         out SqlInt32 customerId)  
-        {  
-            //TODO: When we can pass XML from T-SQL then contactData can be a SqlXmlReader  
-using (StringReader sr = new StringReader(contactData.Value))  
-{  
-XmlReader reader = XmlReader.Create(sr);  
-ContactCreator creator = null;  
-  
-try  
-{  
-reader.MoveToContent();  
-EnsureEqual(reader.LocalName, "Contact");  
-reader.MoveToContent();  
-reader.ReadStartElement();  
-  
-switch (reader.LocalName)  
-{  
-case "Individual": creator = new IndividualCreator(); break;  
-case "Store": creator = new StoreCreator(); break;  
-case "Vendor": creator = new VendorCreator(); break;  
-case "Employee": creator = new EmployeeCreator(); break;  
-default: break;  
-}  
-  
-if (creator != null)  
-{  
+if (creator != null)  {  
 reader.ReadStartElement();  
 reader.MoveToContent();  
 creator.LoadDictionary(reader);  
