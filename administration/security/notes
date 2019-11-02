@@ -1,0 +1,36 @@
+
+
+Summary https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/determining-effective-database-engine-permissions?view=sql-server-ver15
+  - Server-level permission can come from membership in the fixed server roles
+    or user-defined server roles. Everyone belongs to the public fixed server
+    role and receives any permission assigned there.
+  - Server-level permissions can come from permission grants to logins or
+    user-defined server roles.
+  - Database-level permission can come from membership in the fixed database
+    roles or user-defined database roles in each database. Everyone belongs to
+    the public fixed database role and receives any permission assigned there.
+  - Database-level permissions can come from permission grants to users or
+    user-defined database roles in each database.
+  - Permissions can be received from the guest login or guest database user if
+    enabled. The guest login and users are disabled by default.
+  - Windows users can be members of Windows groups that can have logins. SQL
+    Server learns of Windows group membership when a Windows user connects and
+    presents a Windows token with the security identifier of a Windows group.
+    Because SQL Server does not manage or receive automatic updates about
+    Windows group memberships, SQL Server cannot reliably report the
+    permissions of Windows users that are received from Windows group
+    membership.
+  - Permissions can be acquired by switching to an application role and
+    providing the password.
+  - Permissions can be acquired by executing a stored procedure that includes
+    the EXECUTE AS clause.
+  - Permissions can be acquired by logins or users with the IMPERSONATE
+    permission.
+  - Members of the local computer administrator group can always elevate their
+    privileges to sysadmin. (Does not apply to SQL Database.)
+  - Members of the securityadmin fixed server role can elevate many of their
+    privileges and in some cases can elevate the privileges to sysadmin. (Does
+    not apply to SQL Database.)
+  - SQL Server administrators can see information about all logins and users.
+    Less privileged users usually see information about only their own
+    identities.
