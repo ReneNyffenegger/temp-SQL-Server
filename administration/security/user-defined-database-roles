@@ -1,0 +1,5 @@
+Users with the CREATE ROLE permission can create new user-defined database
+roles to represent groups of users with common permissions. Typically
+permissions are granted or denied to the entire role, simplifying permissions
+management and monitoring. Database users can be added to the database roles by
+using the ALTER ROLE ... ADD MEMBER statement. 

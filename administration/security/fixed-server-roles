@@ -1,0 +1,10 @@
+In SQL Server, fixed server roles are a set of pre-configured roles that
+provide convenient group of server-level permissions. Logins can be added to
+the roles using the
+   ALTER SERVER ROLE ... ADD MEMBER
+statement
+
+SQL Database does not support the fixed server roles, but has two roles in the
+master database (dbmanager and loginmanager) that act like server roles.
+
+-> fixed-database-roles

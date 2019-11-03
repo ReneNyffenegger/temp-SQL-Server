@@ -1,0 +1,7 @@
+Fixed database roles are a set of pre-configured roles that provide convenient
+group of database-level permissions. Database users and user-defined database
+roles can be added to the fixed database roles using the
+ ALTER ROLE ... ADD MEMBER statement
+
+-> fixed-server-roles
+-> user-defined-database-roles

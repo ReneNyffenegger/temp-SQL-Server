@@ -1,0 +1,7 @@
+Security principal is the official name of the identities that use SQL Server
+and that can be assigned permission to take actions. They are usually people or
+groups of people, but can be other entities that pretend to be people. The
+security principals can be created and managed using the Transact-SQL listed,
+or by using SQL Server Management Studio.
+
+Compare with -> logins
