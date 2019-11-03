@@ -1,0 +1,56 @@
+Two authentication modes for database engine:
+  - Windows Authentication mode
+  - Mixed mode
+
+Mixed mode =
+   Windows Authentication mode PLUS
+   SQL Server Authentication
+
+Windows Authentication cannot be disabled.
+
+Mixed Mode Authentication {
+
+   Mixed mode authentication  requires a strong password for the built-in SQL Server system administrator account named sa.
+
+}
+{ Window authentication
+
+  Windows Authentication is the default authentication mode, and is much more
+  secure than SQL Server Authentication.
+
+  By using Windows Authentication, Windows groups can be created at the domain
+  level, and a login can be created on SQL Server for the entire group.
+  Managing access from at the domain level can simplify account administration.
+
+  Windows Authentication
+    - uses Kerberos security protocol,
+    - provides password policy enforcement with regard to complexity validation for strong passwords,
+    - provides support for account lockout, and
+    - supports password expiration.
+
+  A connection made using Windows Authentication is sometimes called a trusted connection, because SQL Server
+  trusts the credentials provided by Windows
+
+
+
+  Setup creates the sa account for SQL Server Authentication but it is disabled.
+
+  When a user connects through a Windows user account, SQL Server validates the
+  account name and password using the Windows principal token in the operating
+  system. --> User identity is confirmed by windows - hence, SQL Server does
+  not ask for the password and does not perform identity validation.
+
+
+
+}
+{ SQL server authentication
+
+  logins are created in SQL Server that are not based on Windows user accounts.
+  Both the user name and the password are created by using SQL Server and
+  stored in SQL Server. Users connecting using SQL Server Authentication must
+  provide their credentials (login and password) every time that they connect.
+
+}
+
+
+Any Windows or SQL Server account can be configured as a system administrator.
