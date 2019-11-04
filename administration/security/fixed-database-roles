@@ -83,3 +83,108 @@ MSDB roles
 
 --> sp_helpdbfixedrole
 --> sp_dbfixedrolepermission
+
+
+* * *
+
+exec sp_dbfixedrolepermission
+
+DbFixedRole                                                                                             Permission
+--------------------------------------------------------------------
+db_accessadmin                   sp_dropuser
+db_accessadmin                   sp_grantdbaccess
+db_accessadmin                   sp_revokedbaccess
+db_backupoperator                BACKUP DATABASE
+db_backupoperator                BACKUP LOG
+db_backupoperator                CHECKPOINT
+db_datareader                    SELECT permission on any object
+db_datawriter                    DELETE permission on any object
+db_datawriter                    INSERT permission on any object
+db_datawriter                    UPDATE permission on any object
+db_ddladmin                      All DDL but GRANT, REVOKE, DENY
+db_ddladmin                      dbcc cleantable
+db_ddladmin                      dbcc show_statistics
+db_ddladmin                      dbcc showcontig
+db_ddladmin                      REFERENCES permission on any table
+db_ddladmin                      sp_changeobjectowner
+db_ddladmin                      sp_fulltext_column
+db_ddladmin                      sp_fulltext_table
+db_ddladmin                      sp_recompile
+db_ddladmin                      sp_rename
+db_ddladmin                      sp_tableoption
+db_ddladmin                      TRUNCATE TABLE
+db_denydatareader                No SELECT permission on any object
+db_denydatawriter                No DELETE permission on any object
+db_denydatawriter                No INSERT permission on any object
+db_denydatawriter                No UPDATE permission on any object
+db_owner                         Add/drop to/from db_accessadmin
+db_owner                         Add/drop to/from db_backupoperator
+db_owner                         Add/drop to/from db_datareader
+db_owner                         Add/drop to/from db_datawriter
+db_owner                         Add/drop to/from db_ddladmin
+db_owner                         Add/drop to/from db_denydatareader
+db_owner                         Add/drop to/from db_denydatawriter
+db_owner                         Add/drop to/from db_owner
+db_owner                         Add/drop to/from db_securityadmin
+db_owner                         All DDL but GRANT, REVOKE, DENY
+db_owner                         BACKUP DATABASE
+db_owner                         BACKUP LOG
+db_owner                         CHECKPOINT
+db_owner                         dbcc checkalloc
+db_owner                         dbcc checkdb
+db_owner                         dbcc checkfilegroup
+db_owner                         dbcc checkident
+db_owner                         dbcc checktable
+db_owner                         dbcc cleantable
+db_owner                         dbcc dbreindex
+db_owner                         dbcc proccache
+db_owner                         dbcc show_statistics
+db_owner                         dbcc showcontig
+db_owner                         dbcc shrinkdatabase
+db_owner                         dbcc shrinkfile
+db_owner                         dbcc updateusage
+db_owner                         DELETE permission on any object
+db_owner                         DENY
+db_owner                         EXECUTE any procedure
+db_owner                         GRANT
+db_owner                         INSERT permission on any object
+db_owner                         REFERENCES permission on any table
+db_owner                         REVOKE
+db_owner                         SELECT permission on any object
+db_owner                         sp_addapprole
+db_owner                         sp_addrole
+db_owner                         sp_addrolemember
+db_owner                         sp_approlepassword
+db_owner                         sp_change_users_login
+db_owner                         sp_changeobjectowner
+db_owner                         sp_dbcmptlevel
+db_owner                         sp_dropapprole
+db_owner                         sp_droprole
+db_owner                         sp_droprolemember
+db_owner                         sp_dropuser
+db_owner                         sp_fulltext_catalog
+db_owner                         sp_fulltext_column
+db_owner                         sp_fulltext_database
+db_owner                         sp_fulltext_table
+db_owner                         sp_grantdbaccess
+db_owner                         sp_recompile
+db_owner                         sp_refreshview
+db_owner                         sp_rename
+db_owner                         sp_revokedbaccess
+db_owner                         sp_tableoption
+db_owner                         TRUNCATE TABLE
+db_owner                         UPDATE permission on any object
+db_securityadmin                 DENY
+db_securityadmin                 GRANT
+db_securityadmin                 REVOKE
+db_securityadmin                 sp_addapprole
+db_securityadmin                 sp_addrole
+db_securityadmin                 sp_addrolemember
+db_securityadmin                 sp_approlepassword
+db_securityadmin                 sp_changeobjectowner
+db_securityadmin                 sp_dropapprole
+db_securityadmin                 sp_droprole
+db_securityadmin                 sp_droprolemember
+
+(94 rows affected)
+
