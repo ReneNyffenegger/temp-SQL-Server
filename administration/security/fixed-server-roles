@@ -24,7 +24,7 @@ The set of fixed server roles is:
    - serveradmin
         o can change server-wide configuration options
           and shut down the server.
-   - security admin
+   - securityadmin
         o manage logins and their properties.
         o can GRANT, DENY, and REVOKE server-level permissions. They
         o can GRANT, DENY, and REVOKE database-level permissions]
@@ -51,4 +51,5 @@ The set of fixed server roles is:
         o public role cannot be dropped
         o permissions can be revoked from the public role
         o Compare with public database role.
-   - ...
+
+    --> exec sp_helpsrvrole
