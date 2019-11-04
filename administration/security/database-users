@@ -11,6 +11,37 @@ Each database user maps to a single login. A login can be mapped to only one
 user in a database, but can be mapped as a database user in several different
 databases.
 
+12 types of users
+-----------------
+   Users based on logins in master - This is the most common type of user.
+      - User based on a login based on a Windows Active Directory account. CREATE USER [Contoso\Fritz];
+      - User based on a login based on a Windows group. CREATE USER [Contoso\Sales];
+      - User based on a login using SQL Server authentication. CREATE USER Mary;
+
+    Users that authenticate at the database - Recommended to help make your database more portable.
+    Always allowed in SQL Database. Only allowed in a contained database in SQL Server.
+       - User based on a Windows user that has no login. CREATE USER [Contoso\Fritz];
+       - User based on a Windows group that has no login. CREATE USER [Contoso\Sales];
+       - User in SQL Database or SQL Data Warehouse based on an Azure Active Directory user.
+              CREATE USER [Fritz@contoso.com] FROM EXTERNAL PROVIDER;
+       - Contained database user with password. (Not available in SQL Data Warehouse.)
+               CREATE USER Mary WITH PASSWORD = '********';
+
+    Users based on Windows principals that connect through Windows group logins
+       - User based on a Windows user that has no login,
+         but can connect to the Database Engine through membership in a Windows group.
+              CREATE USER [Contoso\Fritz];
+       - User based on a Windows group that has no login,
+         but can connect to the Database Engine through membership in a different Windows group.
+              CREATE USER [Contoso\Fritz];
+    Users that cannot authenticate - These users cannot login to SQL Server or SQL Database.
+       - User without a login. Cannot login but can be granted permissions. CREATE USER CustomApp WITHOUT LOGIN;
+       - User based on a certificate. Cannot login but can be granted permissions and can sign modules.
+               CREATE USER TestProcess FOR CERTIFICATE CarnationProduction50;
+       - User based on an asymmetric key.
+         Cannot login but can be granted permissions and can sign modules.
+              CREATE User TestProcess FROM ASYMMETRIC KEY PacificSales09;
+
 guest user
 ---------
    Each database includes a guest.
