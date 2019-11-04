@@ -12,6 +12,15 @@ master database (dbmanager and loginmanager) that act like server roles.
 -> fixed-database-roles
 
 The set of fixed server roles is:
+   - sysadmin
+        o encompasses all other roles and has unlimited scope.
+        o Do not add principals to this role unless they
+          are highly trusted.
+        o sysadmin role members have irrevocable administrative
+          privileges on all server databases and resources.
+   - bulkadmin 
+        o allows users to insert the contents of any local file
+          into a table, which could jeopardize data integrity.
    - public
         o Every login belongs to public
         o public role cannot be dropped
