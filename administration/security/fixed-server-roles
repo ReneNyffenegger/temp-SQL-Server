@@ -4,7 +4,13 @@ the roles using the
    ALTER SERVER ROLE ... ADD MEMBER
 statement
 
+Every login belongs to the public fixed server role.
+
 SQL Database does not support the fixed server roles, but has two roles in the
 master database (dbmanager and loginmanager) that act like server roles.
 
 -> fixed-database-roles
+
+The set of fixed server roles is:
+   - public (to which everly login belongs)
+   - ...
