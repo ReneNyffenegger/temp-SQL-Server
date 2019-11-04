@@ -61,3 +61,4 @@ The set of fixed server roles is:
 
     --> exec sp_helpsrvrole       shows fixed server roles
     --> exec sp_helpsrvrolemember Returns information about the members of a SQL Server fixed server role.
+    --> exec sp_srvrolepermission shows the permissions that the fixed server roles have.
