@@ -1,0 +1,3 @@
+When a login or user has not been granted or denied specific permissions on
+a securable, the login or user inherits the permissions granted to public
+on that securable.

@@ -1,8 +1,61 @@
+Every database user belongs to the public database role.
+
+When a login or user has not been granted or denied specific permissions on
+a securable, the login or user inherits the permissions granted to public
+on that securable.
+
 Logins are granted access to a database by creating a database user in a
 database and mapping that database user to login. Typically the database user
 name is the same as the login name, though it does not have to be the same.
 Each database user maps to a single login. A login can be mapped to only one
 user in a database, but can be mapped as a database user in several different
 databases.
+
+The database user is the identity of the login when it is connected to a database. 
+The database user can use the same name as the login, but that is not required
+
+12 types of users
+-----------------
+   Users based on logins in master - This is the most common type of user.
+      - User based on a login based on a Windows Active Directory account. CREATE USER [Contoso\Fritz];
+      - User based on a login based on a Windows group. CREATE USER [Contoso\Sales];
+      - User based on a login using SQL Server authentication. CREATE USER Mary;
+
+    Users that authenticate at the database - Recommended to help make your database more portable.
+    Always allowed in SQL Database. Only allowed in a contained database in SQL Server.
+       - User based on a Windows user that has no login. CREATE USER [Contoso\Fritz];
+       - User based on a Windows group that has no login. CREATE USER [Contoso\Sales];
+       - User in SQL Database or SQL Data Warehouse based on an Azure Active Directory user.
+              CREATE USER [Fritz@contoso.com] FROM EXTERNAL PROVIDER;
+       - Contained database user with password. (Not available in SQL Data Warehouse.)
+               CREATE USER Mary WITH PASSWORD = '********';
+
+    Users based on Windows principals that connect through Windows group logins
+       - User based on a Windows user that has no login,
+         but can connect to the Database Engine through membership in a Windows group.
+              CREATE USER [Contoso\Fritz];
+       - User based on a Windows group that has no login,
+         but can connect to the Database Engine through membership in a different Windows group.
+              CREATE USER [Contoso\Fritz];
+    Users that cannot authenticate - These users cannot login to SQL Server or SQL Database.
+       - User without a login. Cannot login but can be granted permissions. CREATE USER CustomApp WITHOUT LOGIN;
+       - User based on a certificate. Cannot login but can be granted permissions and can sign modules.
+               CREATE USER TestProcess FOR CERTIFICATE CarnationProduction50;
+       - User based on an asymmetric key.
+         Cannot login but can be granted permissions and can sign modules.
+              CREATE User TestProcess FROM ASYMMETRIC KEY PacificSales09;
+
+guest user
+---------
+   Each database includes a guest.
+   
+   Permissions granted to the guest user
+   are inherited by users who have access to the database,
+   but who do not have a user account in the database.
+   
+   The guest user cannot be dropped, but it can be disabled by revoking
+   it's CONNECT permission.
+   The CONNECT permission can be revoked by executing REVOKE CONNECT FROM GUEST;
+   within any database other than master or tempdb.
 
 compare with -> logins

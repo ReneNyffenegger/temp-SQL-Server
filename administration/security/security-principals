@@ -4,4 +4,43 @@ groups of people, but can be other entities that pretend to be people. The
 security principals can be created and managed using the Transact-SQL listed,
 or by using SQL Server Management Studio.
 
+
+Principals (Database Engine)
+----------------------------
+   Principals are entities that can request SQL Server resources.
+   
+   Like other components of the SQL Server authorization model, principals
+   can be arranged in a hierarchy.
+   
+   The scope of influence of a principal depends on the scope of the
+   definition of the principal:
+     - Windows
+     - server
+     - database;
+   and whether the principal is indivisible or a collection.
+   A Windows Login is an example of an indivisible principal, and
+   a Windows Group is an example of a principal that is a collection.
+   
+   Every principal has a security identifier (SID).
+   A SID (login-SIDs only) can be converted to a string with SUSER_SNAME().
+   
+SQL Server-level principals
+----------------------------
+     - SQL Server authentication Login
+     - Windows authentication login for a Windows user
+     - Windows authentication login for a Windows group
+     - Azure Active Directory authentication login for a AD user
+     - Azure Active Directory authentication login for a AD group
+     - Server Role
+   
+  The SQL Server sa login is a server-level principal.  
+
+Database-level principals
+-------------------------
+   - Database User (There are 12 types of users. For more information, see CREATE USER.)
+   - Database Role
+   - Application Role
+   
+ The dbo user is a special user principal in each database.  
+
 Compare with -> logins

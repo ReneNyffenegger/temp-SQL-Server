@@ -1,0 +1,1 @@
+Logins and other server-level principals (such as server roles) cannot be added to database roles. 

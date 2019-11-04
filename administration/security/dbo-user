@@ -1,0 +1,15 @@
+The dbo user is a special user principal in each database.
+
+The dbo user owns the dbo schema.
+
+The dbo user has all permissions in the database
+and cannot be limited or dropped. dbo stands for database owner,
+but the dbo user account is not the same as the db_owner fixed database role,
+
+All
+  - SQL Server administrators,
+  - members of the sysadmin fixed server role,
+  - sa login,
+  - and owners of the database,
+enter databases as the dbo user. 
+

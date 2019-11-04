@@ -1,0 +1,4 @@
+Every database includes two entities that appear as users in catalog views:
+INFORMATION_SCHEMA and sys.
+
+These entities are required for internal use by the Database Engine. They cannot be modified or dropped.

@@ -5,3 +5,9 @@ management and monitoring. Database users can be added to the database roles by
 using the ALTER ROLE ... ADD MEMBER statement. 
 
 -> fixed-database-roles
+
+Do not add user-defined database roles as members of
+fixed roles. This could enable unintended privilege escalation.
+
+The permissions of user-defined database roles can be customized by
+using the GRANT, DENY, and REVOKE statements.

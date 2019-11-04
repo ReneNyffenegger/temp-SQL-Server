@@ -1,7 +1,198 @@
+Fixed-database roles are defined at the database level and exist in each database
+
 Fixed database roles are a set of pre-configured roles that provide convenient
 group of database-level permissions. Database users and user-defined database
 roles can be added to the fixed database roles using the
  ALTER ROLE ... ADD MEMBER statement
+ 
+Fixed database roles have a pre-defined set of permissions that are
+designed to allow you to easily manage groups of permissions. 
 
 -> fixed-server-roles
 -> user-defined-database-roles
+
+Every database user belongs to the public database role.
+
+Do not add user-defined database roles as members of
+fixed roles. This could enable unintended privilege escalation.
+
+There are also some special-purpose database roles in the msdb database.
+
+The set of fixed database roles is:
+   - db_owner
+       o Members of the db_owner role can perform all
+         configuration and maintenance activities on the database.
+   - public
+       o Every database user belongs to public
+       o public role cannot be dropped
+       o permissions can be revoked from the public role
+       o Compare with the public server role.
+   - ...
+
+
+Fixed Database roes
+  - db_owner
+     o Members of the db_owner database role can manage fixed-database role membership.
+     o can perform all configuration and maintenance activities on the database
+     o can drop the database in SQL Server.
+     o The dbo user account is not the same as the db_owner fixed database role,
+       and the db_owner fixed database role is not the same as the user account
+       that is recorded as the owner of the database
+  - db_securityadmin
+     o can modify role membership for custom roles only and manage permissions. 
+     o can potentially elevate their privileges and their actions should be monitored
+  - db_accessadmin
+     o can add or remove access to the database for Windows logins, Windows groups, and SQL Server logins.
+  - db_backupoperator
+     o can back up the database.
+  - db_ddladmin
+     o can run any Data Definition Language (DDL) command in a database.
+  - db_datawriter
+     o can add, delete, or change data in all user tables.
+  - db_datareader
+     o can read all data from all user tables.
+  - db_denydatawriter
+     o cannot add, modify, or delete any data in the user tables within a database.
+  - db_denydatareader
+     o cannot read any data in the user tables within a database.
+
+
+MSDB roles
+----------
+   The msdb database contains the special-purpose roles:
+     - db_ssisadmin
+     - db_ssisoperator
+     - db_ssisltduser   : Members of these database roles can administer and use SSIS. 
+                       ( Instances of SQL Server that are upgraded from an earlier version might
+                         contain an older version of the role that was named using Data
+                         Transformation Services (DTS) instead of SSIS.)
+                         
+     - dc_admin
+     - dc_operator
+     - dc_proxy         : Members of these database roles can administer and use the data collector
+     
+     - db(?) policyAdminstratorRole : can perform all configuration and maintenance               
+                                      activities on Policy-Based Management policies and conditions
+                                  
+     - (db_? serverGroupAdministratorRole : can administer and use registered server groups.
+     
+     - dbm_monitor ...
+
+
+* * *
+
+--> sp_helpdbfixedrole
+--> sp_dbfixedrolepermission
+--> sp_helprole
+--> sp_helprolemember
+--> sp_helprotect               Report about user permissions for an object, or statement permissions in the current database.
+--> sys.database_role_members
+--> is_member                   Returns if the current user is a member of a Windows group or an SQL Server database role.
+--> CREATE ROLE/ALTER ROLE/DROP ROLE
+--> sp_addrole / sp_droprole
+--> sp_addrolemember / sp_droprolemember
+--> GRANT / DENY / REVOKE
+
+* * *
+
+exec sp_dbfixedrolepermission
+
+DbFixedRole                                                                                             Permission
+--------------------------------------------------------------------
+db_accessadmin                   sp_dropuser
+db_accessadmin                   sp_grantdbaccess
+db_accessadmin                   sp_revokedbaccess
+db_backupoperator                BACKUP DATABASE
+db_backupoperator                BACKUP LOG
+db_backupoperator                CHECKPOINT
+db_datareader                    SELECT permission on any object
+db_datawriter                    DELETE permission on any object
+db_datawriter                    INSERT permission on any object
+db_datawriter                    UPDATE permission on any object
+db_ddladmin                      All DDL but GRANT, REVOKE, DENY
+db_ddladmin                      dbcc cleantable
+db_ddladmin                      dbcc show_statistics
+db_ddladmin                      dbcc showcontig
+db_ddladmin                      REFERENCES permission on any table
+db_ddladmin                      sp_changeobjectowner
+db_ddladmin                      sp_fulltext_column
+db_ddladmin                      sp_fulltext_table
+db_ddladmin                      sp_recompile
+db_ddladmin                      sp_rename
+db_ddladmin                      sp_tableoption
+db_ddladmin                      TRUNCATE TABLE
+db_denydatareader                No SELECT permission on any object
+db_denydatawriter                No DELETE permission on any object
+db_denydatawriter                No INSERT permission on any object
+db_denydatawriter                No UPDATE permission on any object
+db_owner                         Add/drop to/from db_accessadmin
+db_owner                         Add/drop to/from db_backupoperator
+db_owner                         Add/drop to/from db_datareader
+db_owner                         Add/drop to/from db_datawriter
+db_owner                         Add/drop to/from db_ddladmin
+db_owner                         Add/drop to/from db_denydatareader
+db_owner                         Add/drop to/from db_denydatawriter
+db_owner                         Add/drop to/from db_owner
+db_owner                         Add/drop to/from db_securityadmin
+db_owner                         All DDL but GRANT, REVOKE, DENY
+db_owner                         BACKUP DATABASE
+db_owner                         BACKUP LOG
+db_owner                         CHECKPOINT
+db_owner                         dbcc checkalloc
+db_owner                         dbcc checkdb
+db_owner                         dbcc checkfilegroup
+db_owner                         dbcc checkident
+db_owner                         dbcc checktable
+db_owner                         dbcc cleantable
+db_owner                         dbcc dbreindex
+db_owner                         dbcc proccache
+db_owner                         dbcc show_statistics
+db_owner                         dbcc showcontig
+db_owner                         dbcc shrinkdatabase
+db_owner                         dbcc shrinkfile
+db_owner                         dbcc updateusage
+db_owner                         DELETE permission on any object
+db_owner                         DENY
+db_owner                         EXECUTE any procedure
+db_owner                         GRANT
+db_owner                         INSERT permission on any object
+db_owner                         REFERENCES permission on any table
+db_owner                         REVOKE
+db_owner                         SELECT permission on any object
+db_owner                         sp_addapprole
+db_owner                         sp_addrole
+db_owner                         sp_addrolemember
+db_owner                         sp_approlepassword
+db_owner                         sp_change_users_login
+db_owner                         sp_changeobjectowner
+db_owner                         sp_dbcmptlevel
+db_owner                         sp_dropapprole
+db_owner                         sp_droprole
+db_owner                         sp_droprolemember
+db_owner                         sp_dropuser
+db_owner                         sp_fulltext_catalog
+db_owner                         sp_fulltext_column
+db_owner                         sp_fulltext_database
+db_owner                         sp_fulltext_table
+db_owner                         sp_grantdbaccess
+db_owner                         sp_recompile
+db_owner                         sp_refreshview
+db_owner                         sp_rename
+db_owner                         sp_revokedbaccess
+db_owner                         sp_tableoption
+db_owner                         TRUNCATE TABLE
+db_owner                         UPDATE permission on any object
+db_securityadmin                 DENY
+db_securityadmin                 GRANT
+db_securityadmin                 REVOKE
+db_securityadmin                 sp_addapprole
+db_securityadmin                 sp_addrole
+db_securityadmin                 sp_addrolemember
+db_securityadmin                 sp_approlepassword
+db_securityadmin                 sp_changeobjectowner
+db_securityadmin                 sp_dropapprole
+db_securityadmin                 sp_droprole
+db_securityadmin                 sp_droprolemember
+
+(94 rows affected)
+
