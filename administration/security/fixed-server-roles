@@ -73,6 +73,10 @@ The set of fixed server roles is:
     --> exec sp_srvrolepermission shows the permissions that the fixed server roles have.
     --> is_srvrolemember()
     --> sys.server_role_members shows logins that have a membership in a server role.
+    --> sp_addsrvrolemember and sp_dropsrvrolemember are deprected in favour of ALTER SERVER ROLE.
+    --> CREATE SERVER ROLE  creates a user defined server role
+    --> ALTER SERVER ROLE   changes the membership of a server role or changes name of a suer defined server role
+    --> DROP SERVER_ROLE
     
 exec sp_srvrolepermission @srvrolename = 'sysadmin' 
 
