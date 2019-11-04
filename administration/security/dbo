@@ -1,0 +1,8 @@
+The dbo user is a special user principal in each database.
+
+All
+  - SQL Server administrators,
+  - members of the sysadmin fixed server role,
+  - sa login,
+  - and owners of the database,
+enter databases as the dbo user. 
