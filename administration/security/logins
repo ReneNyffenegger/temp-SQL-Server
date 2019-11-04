@@ -21,6 +21,11 @@ on that securable.
 
 Certificate-based SQL Server Logins
 -----------------------------------
+ Server principals with names enclosed by double hash marks (##) are
+ for internal system use only.
+ 
+ The following principals are created from certificates when SQL Server is
+ installed, and should not be deleted:
    ##MS_SQLResourceSigningCertificate##
    ##MS_SQLReplicationSigningCertificate##
    ##MS_SQLAuthenticatorCertificate##
@@ -28,3 +33,6 @@ Certificate-based SQL Server Logins
    ##MS_PolicyEventProcessingLogin##
    ##MS_PolicySigningCertificate##
    ##MS_PolicyTsqlExecutionLogin##
+
+ These principal accounts do not have passwords that can be changed by
+ administrators as they are based on certificates issued to Microsoft.
