@@ -6,8 +6,10 @@ roles can be added to the fixed database roles using the
 -> fixed-server-roles
 -> user-defined-database-roles
 
-The set of fixed dtabase roles is:
+The set of fixed database roles is:
    - db_owner
+   - public (to which every database user belongs)
+     Compare with the public server role.
    - ...
    
 db_owner
