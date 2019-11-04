@@ -20,8 +20,10 @@ declare
    @hash binary(64) = convert(binary(64), '0x' + '$assembly_hash', 1);
 exec sys.sp_add_trusted_assembly
    @hash        = @hash,
-   @description = N'$assembly_dll'
+   @description = N'$assembly_name'
 go
+
+drop assembly if exists $assembly_name;
 
 create assembly  $assembly_name from 0x$assembly_hex
 go

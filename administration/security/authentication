@@ -2,11 +2,15 @@ Two authentication modes for database engine:
   - Windows Authentication mode
   - Mixed mode
 
+
 Mixed mode =
    Windows Authentication mode PLUS
    SQL Server Authentication
 
 Windows Authentication cannot be disabled.
+
+The authentication mode is stored in the registry under
+  key HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSSQLServer\MSSQLServer  value LoginMode.
 
 Mixed Mode Authentication {
 

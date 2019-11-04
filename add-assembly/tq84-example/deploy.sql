@@ -1,3 +1,12 @@
+-- exec sp_configure 'show advanced options', 1
+-- reconfigure
+-- go
+exec sp_configure 'clr enabled'        , 1
+exec sp_configure 'clr strict security', 1
+reconfigure
+go
+
+
 -- create database trusted_db
 --   with trustworthy on;
 -- 
@@ -18,8 +27,8 @@
 -- 
 -- select * from sys.trusted_assemblies;
 -- 
--- drop   function tq84_clr_repeatString;
--- drop   function tq84_clr_nonSqlTypes;
+drop   function tq84_clr_repeatString;
+drop   function tq84_clr_nonSqlTypes;
 -- 
 -- drop   assembly if exists tq84_clr;
 -- 
