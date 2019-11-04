@@ -27,9 +27,11 @@ The set of fixed server roles is:
           are highly trusted.
         o sysadmin role members have irrevocable administrative
           privileges on all server databases and resources.
+        o Allowed in is_srvrolemember()
    - serveradmin
         o can change server-wide configuration options
           and shut down the server.
+        o NOT allowed in is_srvrolemember()
    - securityadmin
         o manage logins and their properties.
         o can GRANT, DENY, and REVOKE server-level permissions. They
@@ -38,18 +40,24 @@ The set of fixed server roles is:
         o can reset passwords for SQL Server logins.
         o securityadmin role should be treated as equivalent to the sysadmin role because
           it has the ability to grant access to the Database Engine and to configure user permissions
+        o NOT allowed in is_srvrolemember()          
    - processadmin
         o can end processes that are running in an instance of SQL Server
+        o Allowed in is_srvrolemember()
    - setupadmin
         o can add and remove linked servers (with T-SQL) [ With Management Studio, sysadmin is required)
+        o NOT allowed in is_srvrolemember()
    - diskadmin
         o used to manage disk files
+        o Allowed in is_srvrolemember()
    - dbcreator
         o can create, alter, drop, and restore any database
+        o Allowed in is_srvrolemember()
    - bulkadmin 
         o can run BULK INSERT statement
         o allows users to insert the contents of any local file
           into a table, which could jeopardize data integrity.
+        o Allowed in is_srvrolemember()          
    - public
         o Implemented differently than other roles (it is implemented as a role), and permissions can be granted,
           denied, or revoked from the public fixed server roles.
@@ -58,10 +66,13 @@ The set of fixed server roles is:
         o public role cannot be dropped
         o permissions can be revoked from the public role
         o Compare with public database role.
+        o NOT allowed in is_srvrolemember()
 
     --> exec sp_helpsrvrole       shows fixed server roles
     --> exec sp_helpsrvrolemember Returns information about the members of a SQL Server fixed server role.
     --> exec sp_srvrolepermission shows the permissions that the fixed server roles have.
+    --> is_srvrolemember()
+    --> sys.server_role_members shows logins that have a membership in a server role.
     
 exec sp_srvrolepermission @srvrolename = 'sysadmin' 
 
