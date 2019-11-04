@@ -11,6 +11,8 @@ Each database user maps to a single login. A login can be mapped to only one
 user in a database, but can be mapped as a database user in several different
 databases.
 
+The database user is the identity of the login when it is connected to a database. 
+
 12 types of users
 -----------------
    Users based on logins in master - This is the most common type of user.
