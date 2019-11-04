@@ -25,12 +25,14 @@ Principals (Database Engine)
    
 SQL Server-level principals
 ----------------------------
-   - SQL Server authentication Login
-   - Windows authentication login for a Windows user
-   - Windows authentication login for a Windows group
-   - Azure Active Directory authentication login for a AD user
-   - Azure Active Directory authentication login for a AD group
-   - Server Role
+     - SQL Server authentication Login
+     - Windows authentication login for a Windows user
+     - Windows authentication login for a Windows group
+     - Azure Active Directory authentication login for a AD user
+     - Azure Active Directory authentication login for a AD group
+     - Server Role
+   
+  The SQL Server sa login is a server-level principal.  
 
 Database-level principals
 -------------------------
