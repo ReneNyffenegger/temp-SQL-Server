@@ -19,6 +19,8 @@ When a login or user has not been granted or denied specific permissions on
 a securable, the login or user inherits the permissions granted to public
 on that securable.
 
+logins can be queried from sys.server_principals
+
 Certificate-based SQL Server Logins
 -----------------------------------
  Server principals with names enclosed by double hash marks (##) are
