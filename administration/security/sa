@@ -1,0 +1,10 @@
+The SQL Server sa log in is a server-level principal
+
+The sa login is a member of the sysadmin fixed server-level role. 
+
+The sa login has all permissions on the server and cannot be limited.
+The sa login cannot be dropped, but it can be disabled so that no one can use it.
+
+By default, it is created when an instance is installed.
+
+Beginning in SQL Server 2005 (9.x), the default database of sa is master. 
