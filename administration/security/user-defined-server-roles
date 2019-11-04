@@ -4,3 +4,5 @@ The server-level permissions are:
    SELECT * FROM sys.fn_builtin_permissions('SERVER') ORDER BY permission_name;  
 
 CREATE SERVER ROLE  creates a user defined server role
+
+Since SQL Server 2012, it has been possible to define custom server-roles
