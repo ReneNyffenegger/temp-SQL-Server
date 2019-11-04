@@ -1,5 +1,11 @@
 In SQL Server, fixed server roles are a set of pre-configured roles that
-provide convenient group of server-level permissions. Logins can be added to
+provide convenient group of server-level permissions.
+
+Fixed server roles are defined at the server level and have permissions to perform
+specific server-level administrative activities.
+Fixed server roles cannot be added, removed, or changed.
+
+Logins can be added to
 the roles using the
    ALTER SERVER ROLE ... ADD MEMBER
 statement
@@ -45,8 +51,9 @@ The set of fixed server roles is:
         o allows users to insert the contents of any local file
           into a table, which could jeopardize data integrity.
    - public
-        o implemented differently than other roles, and permissions can be granted,
+        o Implemented differently than other roles (it is implemented as a role), and permissions can be granted,
           denied, or revoked from the public fixed server roles.
+          Because it is implemented differently, public does not show up in `sp_helpsrvrole`.
         o Every login belongs to public
         o public role cannot be dropped
         o permissions can be revoked from the public role
