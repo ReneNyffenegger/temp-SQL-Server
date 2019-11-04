@@ -22,5 +22,20 @@ Principals (Database Engine)
    a Windows Group is an example of a principal that is a collection.
    
    Every principal has a security identifier (SID).
+   
+SQL Server-level principals
+----------------------------
+   - SQL Server authentication Login
+   - Windows authentication login for a Windows user
+   - Windows authentication login for a Windows group
+   - Azure Active Directory authentication login for a AD user
+   - Azure Active Directory authentication login for a AD group
+   - Server Role
+
+Database-level principals
+-------------------------
+   - Database User (There are 12 types of users. For more information, see CREATE USER.)
+   - Database Role
+   - Application Role
 
 Compare with -> logins
