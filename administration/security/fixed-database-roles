@@ -1,3 +1,5 @@
+Fixed-database roles are defined at the database level and exist in each database
+
 Fixed database roles are a set of pre-configured roles that provide convenient
 group of database-level permissions. Database users and user-defined database
 roles can be added to the fixed database roles using the
@@ -14,6 +16,8 @@ Every database user belongs to the public database role.
 Do not add user-defined database roles as members of
 fixed roles. This could enable unintended privilege escalation.
 
+There are also some special-purpose database roles in the msdb database.
+
 The set of fixed database roles is:
    - db_owner
        o Members of the db_owner role can perform all
@@ -27,7 +31,9 @@ The set of fixed database roles is:
    
 db_owner
 --------
-   The dbo user account is not the same as the db_owner fixed database role,
-   and the db_owner fixed database role is not the same as the user account
-   that is recorded as the owner of the database
+
+   o Members of the db_owner database role can manage fixed-database role membership.
+   o The dbo user account is not the same as the db_owner fixed database role,
+     and the db_owner fixed database role is not the same as the user account
+     that is recorded as the owner of the database
    
