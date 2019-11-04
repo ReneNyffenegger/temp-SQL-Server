@@ -5,3 +5,14 @@ roles can be added to the fixed database roles using the
 
 -> fixed-server-roles
 -> user-defined-database-roles
+
+The set of fixed dtabase roles is:
+   - db_owner
+   - ...
+   
+db_owner
+--------
+   The dbo user account is not the same as the db_owner fixed database role,
+   and the db_owner fixed database role is not the same as the user account
+   that is recorded as the owner of the database
+   
