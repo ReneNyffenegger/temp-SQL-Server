@@ -2,6 +2,9 @@ Fixed database roles are a set of pre-configured roles that provide convenient
 group of database-level permissions. Database users and user-defined database
 roles can be added to the fixed database roles using the
  ALTER ROLE ... ADD MEMBER statement
+ 
+Fixed database roles have a pre-defined set of permissions that are
+designed to allow you to easily manage groups of permissions. 
 
 -> fixed-server-roles
 -> user-defined-database-roles
@@ -10,6 +13,8 @@ Every database user belongs to the public database role.
 
 The set of fixed database roles is:
    - db_owner
+       o Members of the db_owner role can perform all
+         configuration and maintenance activities on the database.
    - public
        o Every database user belongs to public
        o public role cannot be dropped
