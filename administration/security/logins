@@ -4,6 +4,8 @@ authentication and logins based on SQL Server authentication
 
 Every login belongs to the public fixed server role.
 
+Logins must be mapped to database user accounts in order to work with database objects.
+
 Compare with -> security principals
 
 Logins are granted access to a database by creating a database user in a
