@@ -1,0 +1,5 @@
+Is user = database user?
+
+Users can be assigned a default schema, and multiple database users can share the same schema.
+
+By default, users created with the CREATE USER Transact-SQL command have dbo as their default schema.

@@ -1,4 +1,9 @@
  The dbo schema is the default schema for all users,
  unless some other schema is specified.
  
+ The dbo schema is the default schema for a newly created database. The dbo schema is owned by the dbo user account. 
+ 
  The dbo schema cannot be dropped.
+
+ By default, users created with the CREATE USER Transact-SQL command have dbo
+ as their default schema.

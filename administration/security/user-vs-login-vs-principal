@@ -1,0 +1,7 @@
+Logins: access to server
+        two main categories of logins: SQL Server authenticated logins and Windows authenticated logins.
+User  : access to database
+
+Users are mapped to logins and the mapping is expressed by the SID property of
+logins and users. A login maps to a user in a database if their SID values are
+identical. 

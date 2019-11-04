@@ -1,0 +1,2 @@
+Schemas can be owned by any database principal, and a single principal can own multiple schemas. 
+

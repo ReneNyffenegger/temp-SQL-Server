@@ -1,0 +1,25 @@
+SQL Server ships with ten pre-defined schemas that have the same names as the
+built-in database users and roles. These exist mainly for backward
+compatibility. You can drop the schemas that have the same names as the fixed
+database roles if you do not need them. You cannot drop the following schemas:
+
+
+Schemas can be owned by any database principal, and a single principal can own multiple schemas. 
+
+You can apply security rules to a schema, which are inherited by all objects in the schema.
+-
+Once you set up access permissions for a schema, those permissions are automatically applied as new objects are added to the schema.
+
+Users can be assigned a default schema, and multiple database users can share the same schema.
+
+By default, when developers create objects in a schema, the objects are owned
+by the security principal that owns the schema, not the developer.
+
+A schema can also contain objects that are owned by different users and have
+more granular permissions than those assigned to the schema, although this is
+not recommended because it adds complexity to managing permissions. 
+
+Object ownership can be transferred with ALTER AUTHORIZATION Transact-SQL statement.
+
+Objects can be moved between schemas, and schema ownership can be transferred
+between principals. Database users can be dropped without affecting schemas.
