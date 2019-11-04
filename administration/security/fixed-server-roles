@@ -15,6 +15,8 @@ The set of fixed server roles is:
    - sysadmin
         o can perform any activity in the server.
         o encompasses all other roles and has unlimited scope.
+        o Most DBCC commands and many system procedures require membership
+          in the sysadmin fixed server role.
         o Do not add principals to this role unless they
           are highly trusted.
         o sysadmin role members have irrevocable administrative
