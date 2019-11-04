@@ -13,15 +13,38 @@ master database (dbmanager and loginmanager) that act like server roles.
 
 The set of fixed server roles is:
    - sysadmin
+        o can perform any activity in the server.
         o encompasses all other roles and has unlimited scope.
         o Do not add principals to this role unless they
           are highly trusted.
         o sysadmin role members have irrevocable administrative
           privileges on all server databases and resources.
+   - serveradmin
+        o can change server-wide configuration options
+          and shut down the server.
+   - security admin
+        o manage logins and their properties.
+        o can GRANT, DENY, and REVOKE server-level permissions. They
+        o can GRANT, DENY, and REVOKE database-level permissions]
+          if they have access to a database.
+        o can reset passwords for SQL Server logins.
+        o securityadmin role should be treated as equivalent to the sysadmin role because
+          it has the ability to grant access to the Database Engine and to configure user permissions
+   - processadmin
+        o can end processes that are running in an instance of SQL Server
+   - setupadmin
+        o can add and remove linked servers (with T-SQL) [ With Management Studio, sysadmin is required)
+   - diskadmin
+        o used to manage disk files
+   - dbcreator
+        o can create, alter, drop, and restore any database
    - bulkadmin 
+        o can run BULK INSERT statement
         o allows users to insert the contents of any local file
           into a table, which could jeopardize data integrity.
    - public
+        o implemented differently than other roles, and permissions can be granted,
+          denied, or revoked from the public fixed server roles.
         o Every login belongs to public
         o public role cannot be dropped
         o permissions can be revoked from the public role
