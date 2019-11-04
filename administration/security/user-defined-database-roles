@@ -3,3 +3,6 @@ roles to represent groups of users with common permissions. Typically
 permissions are granted or denied to the entire role, simplifying permissions
 management and monitoring. Database users can be added to the database roles by
 using the ALTER ROLE ... ADD MEMBER statement. 
+
+Do not add user-defined database roles as members of
+fixed roles. This could enable unintended privilege escalation.
