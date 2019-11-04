@@ -11,6 +11,9 @@ designed to allow you to easily manage groups of permissions.
 
 Every database user belongs to the public database role.
 
+Do not add user-defined database roles as members of
+fixed roles. This could enable unintended privilege escalation.
+
 The set of fixed database roles is:
    - db_owner
        o Members of the db_owner role can perform all
