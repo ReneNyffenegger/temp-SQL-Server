@@ -12,6 +12,9 @@ master database (dbmanager and loginmanager) that act like server roles.
 -> fixed-database-roles
 
 The set of fixed server roles is:
-   - public (to which everly login belongs)
-     Compare with public database role.
+   - public
+        o Every login belongs to public
+        o public role cannot be dropped
+        o permissions can be revoked from the public role
+        o Compare with public database role.
    - ...
