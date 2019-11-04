@@ -62,3 +62,193 @@ The set of fixed server roles is:
     --> exec sp_helpsrvrole       shows fixed server roles
     --> exec sp_helpsrvrolemember Returns information about the members of a SQL Server fixed server role.
     --> exec sp_srvrolepermission shows the permissions that the fixed server roles have.
+    
+exec sp_srvrolepermission @srvrolename = 'sysadmin' 
+
+Add extended procedures
+Add member to bulkadmin
+Add member to dbcreator
+Add member to diskadmin
+Add member to processadmin
+Add member to securityadmin
+Add member to serveradmin
+Add member to setupadmin
+Add member to sysadmin
+Add/drop to/from db_accessadmin
+Add/drop to/from db_backupoperator
+Add/drop to/from db_datareader
+Add/drop to/from db_datawriter
+Add/drop to/from db_ddladmin
+Add/drop to/from db_denydatareader
+Add/drop to/from db_denydatawriter
+Add/drop to/from db_owner
+Add/drop to/from db_securityadmin
+Add/drop/configure linked servers
+All DDL but GRANT, REVOKE, DENY
+ALTER DATABASE
+BACKUP DATABASE
+BACKUP LOG
+BULK INSERT
+CHECKPOINT
+Complete SETUSER SQL user
+Constraints on System tables
+CREATE DATABASE
+Create indices on system tables
+Create/delete/modify system tables
+dbcc change 'on' rules
+dbcc checkalloc
+dbcc checkdb
+dbcc checkfilegroup
+dbcc checkident
+dbcc checktable
+dbcc cleantable
+dbcc dbreindex
+dbcc dropcleanbuffers
+dbcc freeproccache
+dbcc inputbuffer
+dbcc outputbuffer
+dbcc pintable
+dbcc proccache
+dbcc setcpuweight
+dbcc setioweight
+dbcc show_statistics
+dbcc showcontig
+dbcc showoptweights
+DBCC ShrinkDatabase
+dbcc shrinkfile
+dbcc traceon/off
+dbcc updateusage
+DELETE permission on any object
+DENY
+DISK INIT
+DROP DATABASE
+EXECUTE any procedure
+Extend database
+GRANT
+Grant/deny/revoke CREATE DATABASE
+INSERT permission on any object
+KILL
+Mark a stored procedure as startup
+Raiserror With Log
+Read the error log
+RECONFIGURE
+REFERENCES permission on any table
+RESTORE DATABASE
+RESTORE LOG
+REVOKE
+SELECT permission on any object
+SHUTDOWN
+sp_addapprole
+sp_addlinkedsrvlogin
+sp_addlogin
+sp_addrole
+sp_addrolemember
+sp_addumpdevice
+sp_adduser
+sp_altermessage
+sp_approlepassword
+sp_change_users_login
+sp_changedbowner
+sp_changeobjectowner
+sp_configure
+sp_dbcmptlevel
+sp_defaultdb
+sp_defaultlanguage
+sp_denylogin
+sp_diskdefault
+sp_dropapprole
+sp_dropdevice
+sp_droplinkedsrvlogin
+sp_droplogin
+sp_dropremotelogin
+sp_droprole
+sp_droprolemember
+sp_dropuser
+sp_fulltext_catalog
+sp_fulltext_column
+sp_fulltext_database
+sp_fulltext_service
+sp_fulltext_table
+sp_grantdbaccess
+sp_grantlogin
+sp_helplogins
+sp_password
+sp_recompile
+sp_refreshview
+sp_remoteoption
+sp_remoteoption (update)
+sp_rename
+sp_renamedb
+sp_revokedbaccess
+sp_revokelogin
+sp_tableoption
+sp_updatestats
+TRUNCATE TABLE
+UPDATE permission on any object
+USE to a suspect database
+
+exec sp_srvrolepermission @srvrolename = 'serveradmin' 
+
+Add member to serveradmin
+dbcc freeproccache
+RECONFIGURE
+SHUTDOWN
+sp_configure
+sp_fulltext_service
+sp_tableoption
+
+exec sp_srvrolepermission @srvrolename = 'securityadmin' 
+
+Add member to securityadmin
+Grant/deny/revoke CREATE DATABASE
+Read the error log
+sp_addlinkedsrvlogin
+sp_addlogin
+sp_defaultdb
+sp_defaultlanguage
+sp_denylogin
+sp_droplinkedsrvlogin
+sp_droplogin
+sp_dropremotelogin
+sp_grantlogin
+sp_helplogins
+sp_password
+sp_remoteoption (update)
+sp_revokelogin
+
+exec sp_srvrolepermission @srvrolename = 'processadmin' 
+
+Add member to processadmin
+KILL
+
+exec sp_srvrolepermission @srvrolename = 'setupadmin' 
+ 
+Add member to setupadmin
+Add/drop/configure linked servers
+Mark a stored procedure as startup 
+
+exec sp_srvrolepermission @srvrolename = 'diskadmin' 
+
+Add member to diskadmin
+DISK INIT
+sp_addumpdevice
+sp_diskdefault
+sp_dropdevice
+
+exec sp_srvrolepermission @srvrolename = 'dbcreator' 
+
+Add member to dbcreator
+ALTER DATABASE
+CREATE DATABASE
+DROP DATABASE
+Extend database
+RESTORE DATABASE
+RESTORE LOG
+sp_renamedb
+
+exec sp_srvrolepermission @srvrolename = 'bulkadmin' 
+
+Add member to bulkadmin
+BULK INSERT
+
+
