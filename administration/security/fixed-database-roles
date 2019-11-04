@@ -77,3 +77,9 @@ MSDB roles
      - (db_? serverGroupAdministratorRole : can administer and use registered server groups.
      
      - dbm_monitor ...
+
+
+* * *
+
+--> sp_helpdbfixedrole
+--> sp_dbfixedrolepermission
