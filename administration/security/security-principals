@@ -22,6 +22,7 @@ Principals (Database Engine)
    a Windows Group is an example of a principal that is a collection.
    
    Every principal has a security identifier (SID).
+   A SID (login-SIDs only) can be converted to a string with SUSER_SNAME().
    
 SQL Server-level principals
 ----------------------------
