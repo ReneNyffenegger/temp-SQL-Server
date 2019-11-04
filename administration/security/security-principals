@@ -39,5 +39,7 @@ Database-level principals
    - Database User (There are 12 types of users. For more information, see CREATE USER.)
    - Database Role
    - Application Role
+   
+ The dbo user is a special user principal in each database.  
 
 Compare with -> logins
