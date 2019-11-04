@@ -2,6 +2,8 @@ Logins are individual user accounts for logging on to the SQL Server Database
 Engine. SQL Server and SQL Database support logins based on Windows
 authentication and logins based on SQL Server authentication
 
+Every login belongs to the public fixed server role.
+
 Compare with -> security principals
 
 Logins are granted access to a database by creating a database user in a
