@@ -28,12 +28,52 @@ The set of fixed database roles is:
        o permissions can be revoked from the public role
        o Compare with the public server role.
    - ...
-   
-db_owner
---------
 
-   o Members of the db_owner database role can manage fixed-database role membership.
-   o The dbo user account is not the same as the db_owner fixed database role,
-     and the db_owner fixed database role is not the same as the user account
-     that is recorded as the owner of the database
-   
+
+Fixed Database roes
+  - db_owner
+     o Members of the db_owner database role can manage fixed-database role membership.
+     o can perform all configuration and maintenance activities on the database
+     o can drop the database in SQL Server.
+     o The dbo user account is not the same as the db_owner fixed database role,
+       and the db_owner fixed database role is not the same as the user account
+       that is recorded as the owner of the database
+  - db_securityadmin
+     o can modify role membership for custom roles only and manage permissions. 
+     o can potentially elevate their privileges and their actions should be monitored
+  - db_accessadmin
+     o can add or remove access to the database for Windows logins, Windows groups, and SQL Server logins.
+  - db_backupoperator
+     o can back up the database.
+  - db_ddladmin
+     o can run any Data Definition Language (DDL) command in a database.
+  - db_datawriter
+     o can add, delete, or change data in all user tables.
+  - db_datareader
+     o can read all data from all user tables.
+  - db_denydatawriter
+     o cannot add, modify, or delete any data in the user tables within a database.
+  - db_denydatareader
+     o cannot read any data in the user tables within a database.
+
+
+MSDB roles
+----------
+   The msdb database contains the special-purpose roles:
+     - db_ssisadmin
+     - db_ssisoperator
+     - db_ssisltduser   : Members of these database roles can administer and use SSIS. 
+                       ( Instances of SQL Server that are upgraded from an earlier version might
+                         contain an older version of the role that was named using Data
+                         Transformation Services (DTS) instead of SSIS.)
+                         
+     - dc_admin
+     - dc_operator
+     - dc_proxy         : Members of these database roles can administer and use the data collector
+     
+     - db(?) policyAdminstratorRole : can perform all configuration and maintenance               
+                                      activities on Policy-Based Management policies and conditions
+                                  
+     - (db_? serverGroupAdministratorRole : can administer and use registered server groups.
+     
+     - dbm_monitor ...
