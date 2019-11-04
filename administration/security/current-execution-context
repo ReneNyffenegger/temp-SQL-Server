@@ -1,0 +1,1 @@
+is_srvrfolemember(): if no value is specified, the result is based on the current Execution context.
