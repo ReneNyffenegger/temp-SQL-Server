@@ -59,4 +59,5 @@ The set of fixed server roles is:
         o permissions can be revoked from the public role
         o Compare with public database role.
 
-    --> exec sp_helpsrvrole
+    --> exec sp_helpsrvrole       shows fixed server roles
+    --> exec sp_helpsrvrolemember Returns information about the members of a SQL Server fixed server role.
