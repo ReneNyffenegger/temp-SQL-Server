@@ -18,3 +18,13 @@ in several different databases.
 When a login or user has not been granted or denied specific permissions on
 a securable, the login or user inherits the permissions granted to public
 on that securable.
+
+Certificate-based SQL Server Logins
+-----------------------------------
+   ##MS_SQLResourceSigningCertificate##
+   ##MS_SQLReplicationSigningCertificate##
+   ##MS_SQLAuthenticatorCertificate##
+   ##MS_AgentSigningCertificate##
+   ##MS_PolicyEventProcessingLogin##
+   ##MS_PolicySigningCertificate##
+   ##MS_PolicyTsqlExecutionLogin##
