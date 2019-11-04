@@ -10,8 +10,11 @@ Every database user belongs to the public database role.
 
 The set of fixed database roles is:
    - db_owner
-   - public (to which every database user belongs)
-     Compare with the public server role.
+   - public
+       o Every database user belongs to public
+       o public role cannot be dropped
+       o permissions can be revoked from the public role
+       o Compare with the public server role.
    - ...
    
 db_owner
