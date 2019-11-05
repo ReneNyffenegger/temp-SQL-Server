@@ -14,6 +14,9 @@ databases.
 The database user is the identity of the login when it is connected to a database. 
 The database user can use the same name as the login, but that is not required
 
+The relevant base table seems to be sys.sysowners.
+  - sys.database_principals selects from it.
+
 12 types of users
 -----------------
    Users based on logins in master - This is the most common type of user.
