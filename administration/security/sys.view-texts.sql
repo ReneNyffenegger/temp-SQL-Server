@@ -1,3 +1,35 @@
+CREATE VIEW sys.asymmetric_keys AS  
+ SELECT a.name AS name,  
+  r.indepid AS principal_id,  
+  a.id AS asymmetric_key_id,  
+  a.encrtype AS pvt_key_encryption_type,  
+  ce.name AS pvt_key_encryption_type_desc,  
+  a.thumbprint AS thumbprint,  
+  a.algorithm AS algorithm,  
+  case when vpt.value = 6 then -- x_emd_EKMProvider = 6  
+      convert(varbinary(60),asymkeyproperty(a.id, 'algorithm_desc'))  
+      else alg.name end AS algorithm_desc,  
+  a.bitlength AS key_length,  
+  convert(varbinary(85), asymkeyproperty(a.id, 'sid')) AS sid,  
+  convert(nvarchar(128), asymkeyproperty(a.id, 'string_sid')) AS string_sid,  
+  a.pukey AS public_key,  
+  convert(nvarchar(260), v.value) AS attested_by,  
+  n.name as provider_type,  
+  convert (uniqueidentifier, vpg.value) AS cryptographic_provider_guid,  
+  vpa.value AS cryptographic_provider_algid  
+ FROM sys.sysasymkeys a  
+ LEFT JOIN sys.syssingleobjrefs r ON r.depid = a.id AND r.class = 64 AND r.depsubid = 0  
+ LEFT JOIN sys.syspalnames ce ON ce.class = 'CETY' AND ce.value = a.encrtype  
+ LEFT JOIN sys.syspalnames alg ON alg.class = 'ENAL' AND alg.value = a.algorithm  
+ LEFT JOIN sys.sysobjvalues v ON v.valclass = 34 AND v.objid = a.id AND v.subobjid = 0 AND v.valnum = 0 -- SVC_AKATTESTINGDLLPATH  
+ LEFT JOIN sys.sysobjvalues vpt ON vpt.valclass = 31 AND vpt.objid = a.id AND vpt.subobjid = 0 AND vpt.valnum = 1 -- SVC_AKPROVPROPS/PROV_TYPE_PROP  
+ LEFT JOIN sys.sysobjvalues vpg ON vpg.valclass = 31 AND vpg.objid = a.id AND vpg.subobjid = 0 AND vpg.valnum = 2 -- SVC_AKPROVPROPS/PROV_GUID_PROP  
+ LEFT JOIN sys.sysobjvalues vpa ON vpa.valclass = 31 AND vpa.objid = a.id AND vpa.subobjid = 0 AND vpa.valnum = 3 -- SVC_AKPROVPROPS/PROV_ALGID_PROP  
+ LEFT JOIN sys.syspalvalues n ON n.class = 'CPKP' AND n.value = vpt.value  
+ WHERE has_access('AK', a.id) = 1  
+
+
+
 CREATE VIEW sys.database_principals AS  
  SELECT u.name,  
   u.id AS principal_id,  
