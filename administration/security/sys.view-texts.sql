@@ -60,6 +60,26 @@ CREATE VIEW sys.database_principals AS
   AND p.type <> 'M' -- exclude component logins  
   
   
+CREATE VIEW sys.sql_logins AS  
+ SELECT p.name,  
+  p.id AS principal_id,  
+  p.sid, p.type,  
+  n.name AS type_desc,  
+  sysconv(bit, p.status & 0x80) AS is_disabled,  
+  p.crdate AS create_date,  
+  p.modate AS modify_date,  
+  p.dbname AS default_database_name,  
+  p.lang AS default_language_name,  
+  r.indepid AS credential_id,  
+  sysconv(bit, p.status & 0x10000) AS is_policy_checked,  
+  sysconv(bit, p.status & 0x20000) AS is_expiration_checked,  
+  convert(varbinary(256), LoginProperty(p.name, 'PasswordHash')) AS password_hash  
+ FROM master.sys.sysxlgns p  
+ LEFT JOIN sys.syssingleobjrefs r ON r.depid = p.id AND r.class = 63 AND r.depsubid = 0 -- SRC_LOGIN_CREDENTIAL  
+ LEFT JOIN sys.syspalnames n ON n.class = 'LGTY' AND n.value = p.type  
+ WHERE type = 'S'  
+  AND has_access('LG', id) = 1    
+  
 -- Note: gid (max group id) not maintained, shiloh logic not correct anyway  
 --  
 CREATE VIEW sys.sysusers AS  
