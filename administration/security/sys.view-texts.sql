@@ -80,6 +80,51 @@ CREATE VIEW sys.sql_logins AS
  WHERE type = 'S'  
   AND has_access('LG', id) = 1    
   
+  
+ CREATE VIEW sys.syslogins AS SELECT  
+ sid = p.sid,  
+ status = convert(smallint, 8 +  
+  CASE WHEN m.state in ('G','W') THEN 1 ELSE 2 END),  
+ createdate = p.create_date,  
+ updatedate = p.modify_date,  
+ accdate = p.create_date,  
+ totcpu = convert(int, 0),  
+ totio = convert(int, 0),  
+ spacelimit = convert(int, 0),  
+ timelimit = convert(int, 0),  
+ resultlimit = convert(int, 0),  
+ name = p.name,  
+ dbname = p.default_database_name,  
+ password = convert(sysname, LoginProperty(p.name, 'PasswordHash')),  
+ language = p.default_language_name,  
+ denylogin = convert(int, CASE WHEN m.state ='D' THEN 1 ELSE 0 END),  
+ hasaccess = convert(int, CASE WHEN m.state in ('G','W') THEN 1 ELSE 0 END),  
+ isntname = convert(int, CASE WHEN p.type in ('G','U') THEN 1 ELSE 0 END),  
+ isntgroup = convert(int, CASE WHEN p.type='G' THEN 1 ELSE 0 END),  
+ isntuser = convert(int, CASE WHEN p.type='U' THEN 1 ELSE 0 END),  
+ sysadmin = convert(int, ISNULL ((SELECT 1 FROM sys.server_role_members WHERE member_principal_id = p.principal_id  
+  AND role_principal_id = 3), 0)), --x_MDLoginIdSysAdmin  
+ securityadmin = convert(int, ISNULL ((SELECT 1 FROM sys.server_role_members WHERE member_principal_id = p.principal_id  
+  AND role_principal_id = 4), 0)), --x_MDLoginIdSecAdmin  
+ serveradmin = convert(int, ISNULL ((SELECT 1 FROM sys.server_role_members WHERE member_principal_id = p.principal_id  
+  AND role_principal_id = 5), 0)), --x_MDLoginIdServAdmin  
+ setupadmin = convert(int, ISNULL ((SELECT 1 FROM sys.server_role_members WHERE member_principal_id = p.principal_id  
+  AND role_principal_id = 6), 0)), --x_MDLoginIdSetupAdmin  
+ processadmin = convert(int, ISNULL ((SELECT 1 FROM sys.server_role_members WHERE member_principal_id = p.principal_id  
+  AND role_principal_id = 7), 0)), --x_MDLoginIdProcAdmin  
+ diskadmin = convert(int, ISNULL ((SELECT 1 FROM sys.server_role_members WHERE member_principal_id = p.principal_id  
+  AND role_principal_id = 8), 0)), --x_MDLoginIdDiskAdmin  
+ dbcreator = convert(int, ISNULL ((SELECT 1 FROM sys.server_role_members WHERE member_principal_id = p.principal_id  
+  AND role_principal_id = 9), 0)), --x_MDLoginIdDBCreator  
+ bulkadmin = convert(int, ISNULL ((SELECT 1 FROM sys.server_role_members WHERE member_principal_id = p.principal_id  
+  AND role_principal_id = 10), 0)), --x_MDLoginIdBulkAdmin  
+ loginname = p.name  
+FROM sys.server_principals p LEFT JOIN master.sys.sysprivs m  
+ ON m.class = 100 AND m.id = 0 AND m.subid = 0 AND m.grantee = p.principal_id AND m.grantor = 1 AND m.type = 'COSQ'  
+WHERE p.type <> 'R'  
+  
+  
+  
 -- Note: gid (max group id) not maintained, shiloh logic not correct anyway  
 --  
 CREATE VIEW sys.sysusers AS  
