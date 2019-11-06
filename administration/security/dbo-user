@@ -1,5 +1,7 @@
 The dbo user is a special user principal in each database.
 
+dbo is the user that owns a database.
+
 The dbo user owns the dbo schema.
 -
 The dbo schema is the default schema for a newly created database. The dbo schema is owned by the dbo user account. 

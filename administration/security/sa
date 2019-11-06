@@ -8,3 +8,11 @@ The sa login cannot be dropped, but it can be disabled so that no one can use it
 By default, it is created when an instance is installed.
 
 Beginning in SQL Server 2005 (9.x), the default database of sa is master. 
+
+sa owns the databases 
+   master,
+   tempdb
+   model (these ownerships cannot be changed)
+and
+   msdb
+    
