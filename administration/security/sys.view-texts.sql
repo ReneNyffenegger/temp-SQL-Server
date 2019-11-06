@@ -1,3 +1,21 @@
+CREATE VIEW sys.assemblies AS  
+ SELECT s.name AS name,   
+  r.indepid AS principal_id,  
+  s.id AS assembly_id,  
+  convert(nvarchar(4000), assemblyproperty(s.name, 'CLRName')) collate Latin1_General_BIN AS clr_name,  
+  convert(tinyint, s.intprop) AS permission_set,  
+  i.name AS permission_set_desc,  
+  sysconv(bit, s.status & 1) AS is_visible, -- ASM_EXPLICIT_REG  
+  s.created AS create_date,  
+  s.modified AS modify_date,  
+  convert(bit, case when s.id < 65536 then 0 else 1 end) AS is_user_defined       -- x_MinUserAssemblyID  
+ FROM sys.sysclsobjs s  
+ LEFT JOIN sys.syssingleobjrefs r ON r.depid = s.id AND r.class = 52 AND r.depsubid = 0 -- SRC_ASMOWNER  
+ LEFT JOIN sys.syspalvalues i ON i.class = 'ASPS' AND i.value = s.intprop  
+ WHERE s.class = 10  
+  AND has_access('AS', s.id) = 1 -- SOC_ASSEMBLY  
+    
+
 CREATE VIEW sys.asymmetric_keys AS  
  SELECT a.name AS name,  
   r.indepid AS principal_id,  
