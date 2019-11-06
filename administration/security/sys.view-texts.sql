@@ -28,7 +28,29 @@ CREATE VIEW sys.asymmetric_keys AS
  LEFT JOIN sys.syspalvalues n ON n.class = 'CPKP' AND n.value = vpt.value  
  WHERE has_access('AK', a.id) = 1  
 
-
+CREATE VIEW sys.certificates AS  
+ SELECT c.name,  
+  c.id AS certificate_id,  
+  r.indepid AS principal_id,  
+  c.encrtype AS pvt_key_encryption_type,  
+  ce.name AS pvt_key_encryption_type_desc,  
+  sysconv(bit, ~c.status & 0x1) AS is_active_for_begin_dialog,  
+  convert(nvarchar(442), certproperty(c.id, 'issuer_name')) AS issuer_name,  
+  convert(nvarchar(64),  certproperty(c.id, 'cert_serial_number')) AS cert_serial_number,  
+  convert(varbinary(85), certproperty(c.id, 'sid')) AS sid,  
+  convert(nvarchar(128), certproperty(c.id, 'string_sid')) AS string_sid,  
+  convert(nvarchar(4000),certproperty(c.id, 'subject')) AS subject,  
+  convert(datetime, certproperty(c.id, 'expiry_date')) AS expiry_date,  
+  convert(datetime, certproperty(c.id, 'start_date')) AS start_date,  
+  c.thumbprint AS thumbprint,  
+  convert(nvarchar(260), v.value) AS attested_by,  
+  c.lastpkeybackup AS pvt_key_last_backup_date,  
+  convert(int, certproperty(c.id, 'key_length')) AS key_length  
+ FROM sys.syscerts c  
+ LEFT JOIN sys.syssingleobjrefs r ON r.depid = c.id AND r.class = 62 AND r.depsubid = 0 -- SRC_CERTOWNER  
+ LEFT JOIN sys.syspalnames ce ON ce.class = 'CETY' AND ce.value = c.encrtype  
+ LEFT JOIN sys.sysobjvalues v ON v.valclass = 33 AND v.objid = c.id AND v.subobjid = 0 AND v.valnum = 0 -- SVC_CRATTESTINGDLLPATH  
+ WHERE has_access('CE', c.id) = 1  
 
 CREATE VIEW sys.database_principals AS  
  SELECT u.name,  
