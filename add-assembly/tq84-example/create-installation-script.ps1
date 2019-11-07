@@ -6,6 +6,7 @@ if (! (test-path $assembly_dll) ) {
 }
 
 $assembly_name = split-path $assembly_dll -leafBase
+$install_file  = "install-$assembly_name.sql"
 
 # $assembly_dll = 'tq84_asmb.dll'
 $assembly_hash = (get-fileHash -algorithm SHA512 $assembly_dll).hash
@@ -13,9 +14,27 @@ $assembly_hash = (get-fileHash -algorithm SHA512 $assembly_dll).hash
 # $assembly_hex  = (get-content -encoding byte -raw $assembly_dll).foreach( { '{0:X2}' -f $_ } ) -join ''
 $assembly_hex  = (get-content  -asByteStream $assembly_dll).foreach( { '{0:X2}' -f $_ } ) -join ''
 
-remove-item install.sql -errorAction silentlyContinue
+remove-item $install_file -errorAction silentlyContinue
 
 @"
+
+declare -- {
+   @hash binary(64);
+declare
+   cur   cursor for select hash from sys.trusted_assemblies where description = '$assembly_name';
+
+open  cur;
+fetch next from cur into @hash;
+while @@fetch_status = 0 begin -- {
+      exec sp_drop_trusted_assembly @hash;
+      fetch next from cur into @hash;
+end; -- }
+close cur;
+deallocate cur;
+go -- }
+
+
+
 declare
    @hash binary(64) = convert(binary(64), '0x' + '$assembly_hash', 1);
 exec sys.sp_add_trusted_assembly
@@ -28,8 +47,7 @@ drop assembly if exists $assembly_name;
 create assembly  $assembly_name from 0x$assembly_hex
 go
 
-"@ | out-file -append install.sql
-
+"@ | out-file -append $install_file
 
 
 # $assembly_hex
