@@ -72,6 +72,24 @@ CREATE VIEW sys.certificates AS  -- {
  WHERE has_access('CE', c.id) = 1  
 -- }
 
+CREATE VIEW sys.credentials AS  -- {
+ SELECT  
+  co.id AS credential_id,  
+  co.name,  
+  convert(nvarchar(4000), ov.value) as credential_identity,  
+  co.created as create_date,  
+  co.modified as modify_date,  
+  n.name as target_type,  
+  r.indepid AS target_id  
+ FROM master.sys.sysclsobjs co  
+ LEFT JOIN master.sys.sysobjvalues ov ON ov.valclass = 28 AND ov.objid = co.id AND ov.subobjid = 0 AND ov.valnum = 1  
+ LEFT JOIN master.sys.syssingleobjrefs r ON r.depid = co.id AND r.class = co.intprop AND r.depsubid = 0   
+ LEFT JOIN sys.syspalvalues n ON n.class = 'SRCL' AND n.value = co.intprop  
+ WHERE co.class = 57  
+  AND co.type = '' -- Server Scope Credentials   
+  AND has_access('CR', 0) = 1  
+-- }
+                            
 CREATE VIEW sys.databases AS   -- {
  SELECT d.name,   
   d.id AS database_id,  
