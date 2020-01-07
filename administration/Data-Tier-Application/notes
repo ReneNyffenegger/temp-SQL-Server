@@ -19,3 +19,21 @@ DacFx can target SQL Server 2008, 2008R2, 2012, 2014, 2016, 2017 and Microsoft A
 DacFx also provides the command-line utility SqlPackage.exe for creating and deploying.dacpac and .bacpac packages.
 
 DacFx supports scenarios provided by SQL Server client tooling including SQL Server Data Tools and SQL Server Management Studio.
+
+------------------------
+
+> reg query HKLM /s /f "Microsoft SQL Server DAC"
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Classes\ssms.dacpac.14.0
+    (Default)    REG_SZ    Microsoft SQL Server DAC Package File
+
+
+    Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Classes\ssms.dacpac.14.0\Shell\Unpack\Command
+
+       "C:\Program Files (x86)\Microsoft SQL Server\140\DAC\bin\DacUnpack.exe" "%1" 
+
+------------------------
+
+
+/scs:"Server=(local);Database=tq84_db;Trusted_connection=True"
+/tf:….bacpac
