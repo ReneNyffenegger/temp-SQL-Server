@@ -14,6 +14,12 @@ Every login belongs to the public fixed server role.
 
 SQL Database does not support the fixed server roles, but has two roles in the
 master database (dbmanager and loginmanager) that act like server roles.
+    - dbmanager
+        o You must be a member of the dbmanager role or assigned CREATE DATABASE
+          permissions to create a database, including creating a database by
+          deploying a DAC package
+        o You must be a member of the dbmanager role, or have been assigned
+          DROP DATABASE permissions to drop a database.
 
 -> fixed-database-roles
 
