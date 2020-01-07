@@ -1,0 +1,21 @@
+The Microsoft SQL Server Data-Tier Application Framework (DacFx) is a component
+which provides
+  - application lifecycle services for database development and
+  - management
+for
+  - Microsoft SQL Server and
+  - Microsoft Azure SQL Databases.
+
+
+Database deployment and management scenarios:
+ - extracting / exporting a live database to a DAC package,
+ - deploying a DAC package to a new or existing database and
+ - migrating from on - premise SQL Server to Microsoft Azure.
+
+This functionality is exposed via the DacFx managed API.
+
+DacFx can target SQL Server 2008, 2008R2, 2012, 2014, 2016, 2017 and Microsoft Azure SQL Databases.
+
+DacFx also provides the command-line utility SqlPackage.exe for creating and deploying.dacpac and .bacpac packages.
+
+DacFx supports scenarios provided by SQL Server client tooling including SQL Server Data Tools and SQL Server Management Studio.
