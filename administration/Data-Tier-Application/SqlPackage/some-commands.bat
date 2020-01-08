@@ -1,5 +1,8 @@
 @echo off
 
+rem
+rem Already on notes:/Windows/dirs/Program-Files-x86/Microsoft-SQL-Server/version/DAC/bin/SqlPackage_exe
+rem
 sqlPackage.exe                          ^
   /action:extract                       ^
   /sourceServerName:SrvFrom\Inst        ^
