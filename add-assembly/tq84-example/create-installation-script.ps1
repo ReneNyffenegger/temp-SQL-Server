@@ -5,18 +5,25 @@ if (! (test-path $assembly_dll) ) {
    exit
 }
 
-$assembly_name = split-path $assembly_dll -leafBase
+# $assembly_name =                             split-path $assembly_dll -leafBase
+  $assembly_name = [IO.Path]::GetFileNameWithoutExtension($assembly_dll)
+
 $install_file  = "install-$assembly_name.sql"
 
 # $assembly_dll = 'tq84_asmb.dll'
 $assembly_hash = (get-fileHash -algorithm SHA512 $assembly_dll).hash
 
 # $assembly_hex  = (get-content -encoding byte -raw $assembly_dll).foreach( { '{0:X2}' -f $_ } ) -join ''
-$assembly_hex  = (get-content  -asByteStream $assembly_dll).foreach( { '{0:X2}' -f $_ } ) -join ''
+# $assembly_hex  = (get-content  -asByteStream                 $assembly_dll).foreach( { '{0:X2}' -f $_ } ) -join ''
+  $assembly_hex  = (get-content  -encoding Byte -readCount 0   $assembly_dll).foreach( { '{0:X2}' -f $_ } ) -join ''
+# $assembly_hex
 
 remove-item $install_file -errorAction silentlyContinue
 
 @"
+
+use master; -- 2020-02-10 (?)
+go
 
 declare -- {
    @hash binary(64);
